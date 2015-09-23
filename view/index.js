@@ -19,13 +19,19 @@ var Generator = module.exports = function Generator() {
     this.env.options.appPath = this.env.options.appPath || 'app';
     this.options.appPath = this.env.options.appPath;
   }
+  if (this.arguments.length < 2) {
+    this.tplView = 'view';
+  } else {
+    this.tplView = this.arguments[1];
+  }  
 };
 
 util.inherits(Generator, yeoman.generators.NamedBase);
 
 Generator.prototype.createViewFiles = function createViewFiles() {
   this.template(
-    'app/views/view.html',
+    /*'app/views/view.html',*/
+    'app/views/' + this.tplView + '.html',    
     path.join(
       this.env.options.appPath,
       'views',
